@@ -71,4 +71,12 @@
         android:
         app:srcCompat="@drawable/findmelogo" />
 
+    <a href='https://www.freepik.com/vectors/design'>Design vector created by aranjuezmedina - www.freepik.com</a>
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="253dp"
+        android:layout_height="210dp"
+        app:srcCompat="@drawable/switch_8" />
+
 </android.support.design.widget.CoordinatorLayout>
