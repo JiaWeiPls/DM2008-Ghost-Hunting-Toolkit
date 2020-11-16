@@ -34,7 +34,7 @@
         app:srcCompat="@drawable/spiritbox_screenback" />
 
     <ImageView
-        android:id="@+id/screenback5"
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="131dp"
         android:layout_marginTop="210dp"
