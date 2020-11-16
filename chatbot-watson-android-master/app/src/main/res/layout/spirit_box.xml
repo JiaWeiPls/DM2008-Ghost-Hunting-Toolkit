@@ -1,8 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2C2C2C"
     android:fitsSystemWindows="true"
-    tools:context="com.example.vmac.WatBot.MainActivity" />
+    tools:context="com.example.vmac.WatBot.MainActivity" >
+
+    <ImageView
+        android:id="@+id/screenback"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:layout_marginTop="-50dp"
+        app:srcCompat="@drawable/spiritbox_screenback" />
+    <ImageView
+        android:id="@+id/screenback2"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/spiritbox_screenback" />
+    <ImageView
+        android:id="@+id/screenback3"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:layout_marginTop="100dp"
+        app:srcCompat="@drawable/spiritbox_screenback" />
+
+    <ImageView
+        android:id="@+id/screen"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginTop="20dp"
+        app:layout_anchorGravity="center_horizontal"
+        app:srcCompat="@drawable/spiritbox_screen" />
+
+    <ImageView
+        android:id="@+id/screen2"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginTop="95dp"
+        app:layout_anchorGravity="center_horizontal"
+        app:srcCompat="@drawable/spiritbox_screen" />
+
+</android.support.design.widget.CoordinatorLayout>
