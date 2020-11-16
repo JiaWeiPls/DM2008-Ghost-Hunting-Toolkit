@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2C2C2C"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.vmac.WatBot.MainActivity" >
+
+    <ImageView
+        android:id="@+id/screenback"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:layout_marginTop="-50dp"
+        app:srcCompat="@drawable/spiritbox_screenback" />
+    <ImageView
+        android:id="@+id/screenback2"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/spiritbox_screenback" />
+    <ImageView
+        android:id="@+id/screenback3"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:layout_marginTop="100dp"
+        app:srcCompat="@drawable/spiritbox_screenback" />
+    <ImageView
+        android:id="@+id/screenback4"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:layout_marginTop="150dp"
+        app:srcCompat="@drawable/spiritbox_screenback" />
+
+    <ImageView
+        android:id="@+id/screenback5"
+        android:layout_width="wrap_content"
+        android:layout_height="131dp"
+        android:layout_marginTop="210dp"
+        app:srcCompat="@drawable/findmelogo" />
+
+    <ImageView
+        android:id="@+id/screen"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginTop="50dp"
+        app:layout_anchorGravity="center_horizontal"
+        app:srcCompat="@drawable/spiritbox_screen" />
+
+    <ImageView
+        android:id="@+id/screen2"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginTop="125dp"
+        app:layout_anchorGravity="center_horizontal"
+        app:srcCompat="@drawable/spiritbox_screen" />
+    <TextView
+        android:id="@+id/model"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_marginTop="0dp"
+        android:text="DM-2008" />
+    <TextView
+        android:id="@+id/radio"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_marginTop="280dp"
+        android:text="FM Radio" />
+
+
+    <ImageView
+        android:id="@+id/onoff"
+        android:layout_width="253dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginLeft="180dp"
+        app:srcCompat="@drawable/switch_8" /><!--<a href='https://www.freepik.com/vectors/design'>Design vector created by aranjuezmedina - www.freepik.com</a>-->
+
+
+    <ImageView
+        android:id="@+id/knob1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginLeft="70dp"
+        app:srcCompat="@drawable/spiritboxknob1_8" /><!--<a href='https://www.freepik.com/vectors/music'>Music vector created by GarryKillian - www.freepik.com</a>-->
+    <ImageView
+        android:id="@+id/knob2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="580dp"
+        android:layout_marginLeft="70dp"
+        app:srcCompat="@drawable/spiritboxknob2_8" /><!--<a href='https://www.freepik.com/vectors/music'>Music vector created by GarryKillian - www.freepik.com</a>-->
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>
