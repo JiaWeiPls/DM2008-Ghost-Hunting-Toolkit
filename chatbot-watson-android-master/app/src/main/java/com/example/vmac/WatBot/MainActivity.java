@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
   private Response<SessionResponse> watsonAssistantSession;
   private SpeechToText speechService;
   private TextToSpeech textToSpeech;
+  public Message outMessage;
 
   private void createServices() {
     watsonAssistant = new Assistant("2019-02-28", new IamAuthenticator(mContext.getString(R.string.assistant_apikey)));
@@ -263,11 +264,10 @@ public class MainActivity extends AppCompatActivity {
                                         List<RuntimeResponseGeneric> responses = response.getResult().getOutput().getGeneric();
 
                                         for (RuntimeResponseGeneric r : responses) {
-                                            Message outMessage;
                                             switch (r.responseType()) {
                                                 case "text":
                                                     outMessage = new Message();
-                                                    outMessage.setMessage(r.text());
+                                                    outMessage.setMessage(r.text() /* + "<Insert verbal tic here>" */);
                                                     outMessage.setId("2");
 
                                                     messageArrayList.add(outMessage);
