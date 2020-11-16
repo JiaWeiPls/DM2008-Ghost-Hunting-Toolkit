@@ -38,7 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="131dp"
         android:layout_marginTop="210dp"
-        android:
         app:srcCompat="@drawable/findmelogo" />
 
     <ImageView
