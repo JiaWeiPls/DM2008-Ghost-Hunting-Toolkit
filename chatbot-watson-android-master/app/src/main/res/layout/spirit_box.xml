@@ -26,12 +26,18 @@
         android:layout_height="234dp"
         android:layout_marginTop="100dp"
         app:srcCompat="@drawable/spiritbox_screenback" />
+    <ImageView
+        android:id="@+id/screenback4"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:layout_marginTop="150dp"
+        app:srcCompat="@drawable/spiritbox_screenback" />
 
     <ImageView
         android:id="@+id/screen"
         android:layout_width="match_parent"
         android:layout_height="88dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         app:layout_anchorGravity="center_horizontal"
         app:srcCompat="@drawable/spiritbox_screen" />
 
@@ -39,8 +45,30 @@
         android:id="@+id/screen2"
         android:layout_width="match_parent"
         android:layout_height="88dp"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="125dp"
         app:layout_anchorGravity="center_horizontal"
         app:srcCompat="@drawable/spiritbox_screen" />
+    <TextView
+        android:id="@+id/model"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_marginTop="0dp"
+        android:text="DM-2008" />
+    <TextView
+        android:id="@+id/radio"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_marginTop="280dp"
+        android:text="FM Radio" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="131dp"
+        android:layout_marginTop="210dp"
+        android:
+        app:srcCompat="@drawable/findmelogo" />
 
 </android.support.design.widget.CoordinatorLayout>
