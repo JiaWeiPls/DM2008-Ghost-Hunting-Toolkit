@@ -99,4 +99,28 @@
         android:textColor="@color/black"
         android:textSize="100dp" />
 
+    <ImageButton
+        android:id="@+id/thermButton"
+        android:layout_width="wrap_content"
+        android:layout_height="98dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="630dp"
+        android:background=""
+        android:scaleType="center"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        app:srcCompat="@drawable/thermometericon" />
+
+    <ImageButton
+        android:id="@+id/radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="630dp"
+        android:background=""
+        android:scaleType="center"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        app:srcCompat="@drawable/radioicon" />
+
 </android.support.design.widget.CoordinatorLayout>
