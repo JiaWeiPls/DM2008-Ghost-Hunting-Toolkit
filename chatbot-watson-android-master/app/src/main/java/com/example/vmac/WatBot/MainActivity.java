@@ -1,5 +1,18 @@
 package com.example.vmac.WatBot;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.TypeConverter;
+import android.animation.ValueAnimator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Interpolator;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
+import android.widget.EditText;
 import android.content.Intent;
 import android.Manifest;
 import android.content.Context;
@@ -22,6 +35,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ibm.cloud.sdk.core.http.HttpMediaType;
@@ -53,107 +67,115 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-  private RecyclerView recyclerView;
-  private ChatAdapter mAdapter;
-  private ArrayList messageArrayList;
-  private EditText inputMessage;
-  private ImageButton btnSend;
-  private ImageButton btnRecord;
-  StreamPlayer streamPlayer = new StreamPlayer();
-  private boolean initialRequest;
-  private boolean permissionToRecordAccepted = false;
-  private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
-  private static String TAG = "MainActivity";
-  private static final int RECORD_REQUEST_CODE = 101;
-  private boolean listening = false;
-  private MicrophoneInputStream capture;
-  private Context mContext;
-  private MicrophoneHelper microphoneHelper;
+    private RecyclerView recyclerView;
+    private ChatAdapter mAdapter;
+    private ArrayList messageArrayList;
+    private EditText inputMessage;
+    private ImageButton btnSend;
+    private ImageButton btnRecord;
+    StreamPlayer streamPlayer = new StreamPlayer();
+    private boolean initialRequest;
+    private boolean permissionToRecordAccepted = false;
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private static String TAG = "MainActivity";
+    private static final int RECORD_REQUEST_CODE = 101;
+    private boolean listening = false;
+    private MicrophoneInputStream capture;
+    private Context mContext;
+    private MicrophoneHelper microphoneHelper;
 
-  private ImageButton btnEMF;
-  private ImageButton btnTherm;
+    private ImageButton btnEMF;
+    private ImageButton btnTherm;
+    private TextView freqDisplay;
+    private static DecimalFormat df = new DecimalFormat("00.0");
 
-  private Assistant watsonAssistant;
-  private Response<SessionResponse> watsonAssistantSession;
-  private SpeechToText speechService;
-  private TextToSpeech textToSpeech;
-  public Message outMessage;
+    private int fReading = 0;
+    protected String fDisplay = "Error";
 
-  private void createServices() {
-    watsonAssistant = new Assistant("2019-02-28", new IamAuthenticator(mContext.getString(R.string.assistant_apikey)));
-    watsonAssistant.setServiceUrl(mContext.getString(R.string.assistant_url));
+    private Assistant watsonAssistant;
+    private Response<SessionResponse> watsonAssistantSession;
+    private SpeechToText speechService;
+    private TextToSpeech textToSpeech;
+    public Message outMessage;
 
-    textToSpeech = new TextToSpeech(new IamAuthenticator((mContext.getString(R.string.TTS_apikey))));
-    textToSpeech.setServiceUrl(mContext.getString(R.string.TTS_url));
+    private void createServices() {
+        watsonAssistant = new Assistant("2019-02-28", new IamAuthenticator(mContext.getString(R.string.assistant_apikey)));
+        watsonAssistant.setServiceUrl(mContext.getString(R.string.assistant_url));
 
-    speechService = new SpeechToText(new IamAuthenticator(mContext.getString(R.string.STT_apikey)));
-    speechService.setServiceUrl(mContext.getString(R.string.STT_url));
-  }
+        textToSpeech = new TextToSpeech(new IamAuthenticator((mContext.getString(R.string.TTS_apikey))));
+        textToSpeech.setServiceUrl(mContext.getString(R.string.TTS_url));
+
+        speechService = new SpeechToText(new IamAuthenticator(mContext.getString(R.string.STT_apikey)));
+        speechService.setServiceUrl(mContext.getString(R.string.STT_url));
+    }
   /*
   public void PlayBackgroundSound(View view) {
       Intent intent = new Intent(MainActivity.this, BackgroundSoundService.class);
       startService(intent);
   }*/
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.spirit_box);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.spirit_box);
 
-    mContext = getApplicationContext();
+        mContext = getApplicationContext();
 
-    Intent intent = new Intent(MainActivity.this, BackgroundSoundService.class);
-    startService(intent);
+        Intent intent = new Intent(MainActivity.this, BackgroundSoundService.class);
+        startService(intent);
 
-    btnEMF = findViewById(R.id.emfButton);
-    btnTherm = findViewById(R.id.thermButton);
+        btnEMF = findViewById(R.id.emfButton);
+        btnTherm = findViewById(R.id.thermButton);
+        freqDisplay = findViewById(R.id.freq);
+        //displayFreq();
+        animateTextView(00.0f, 99.9f, 300000, freqDisplay);
 
-    btnEMF.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(v.getContext(), EMFActivity.class);
-            startActivity(intent);
+        btnEMF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EMFActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnTherm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ThermActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        inputMessage = findViewById(R.id.message);
+        btnSend = findViewById(R.id.knob1);
+        btnRecord = findViewById(R.id.knob2);
+        String customFont = "Montserrat-Regular.ttf";
+        Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
+        inputMessage.setTypeface(typeface);
+        recyclerView = findViewById(R.id.recycler_view);
+
+        messageArrayList = new ArrayList<>();
+        mAdapter = new ChatAdapter(messageArrayList);
+        microphoneHelper = new MicrophoneHelper(this);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+        this.inputMessage.setText("");
+        this.initialRequest = true;
+
+
+        int permission = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            Log.i(TAG, "Permission to record denied");
+            makeRequest();
+        } else {
+            Log.i(TAG, "Permission to record was already granted");
         }
-    });
-
-    btnTherm.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(v.getContext(), ThermActivity.class);
-            startActivity(intent);
-        }
-    });
-
-    inputMessage = findViewById(R.id.message);
-    btnSend = findViewById(R.id.knob1);
-    btnRecord = findViewById(R.id.knob2);
-    String customFont = "Montserrat-Regular.ttf";
-    Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
-    inputMessage.setTypeface(typeface);
-    recyclerView = findViewById(R.id.recycler_view);
-
-    messageArrayList = new ArrayList<>();
-    mAdapter = new ChatAdapter(messageArrayList);
-    microphoneHelper = new MicrophoneHelper(this);
-
-    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-    layoutManager.setStackFromEnd(true);
-    recyclerView.setLayoutManager(layoutManager);
-    recyclerView.setItemAnimator(new DefaultItemAnimator());
-    recyclerView.setAdapter(mAdapter);
-    this.inputMessage.setText("");
-    this.initialRequest = true;
-
-
-    int permission = ContextCompat.checkSelfPermission(this,
-      Manifest.permission.RECORD_AUDIO);
-
-    if (permission != PackageManager.PERMISSION_GRANTED) {
-      Log.i(TAG, "Permission to record denied");
-      makeRequest();
-    } else {
-      Log.i(TAG, "Permission to record was already granted");
-    }
 
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
@@ -190,7 +212,9 @@ public class MainActivity extends AppCompatActivity {
 
         createServices();
         sendMessage();
-    };
+    }
+
+    ;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -200,13 +224,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) { switch(item.getItemId()) {
-        case R.id.refresh:
-            finish();
-            startActivity(getIntent());
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.refresh:
+                finish();
+                startActivity(getIntent());
 
-    }
-        return(super.onOptionsItemSelected(item));
+        }
+        return (super.onOptionsItemSelected(item));
     }
 
 
@@ -251,110 +276,110 @@ public class MainActivity extends AppCompatActivity {
     // Sending a message to Watson Assistant Service
     private void sendMessage() {
 
-                        final String inputmessage = this.inputMessage.getText().toString().trim();
-                        if (!this.initialRequest) {
-                            Message inputMessage = new Message();
-                            inputMessage.setMessage(inputmessage);
-                            inputMessage.setId("1");
-                            messageArrayList.add(inputMessage);
-                        } else {
-                            Message inputMessage = new Message();
-                            inputMessage.setMessage(inputmessage);
-                            inputMessage.setId("100");
-                            this.initialRequest = false;
-                            //Toast.makeText(getApplicationContext(), "Tap on the message for Voice", Toast.LENGTH_LONG).show();
+        final String inputmessage = this.inputMessage.getText().toString().trim();
+        if (!this.initialRequest) {
+            Message inputMessage = new Message();
+            inputMessage.setMessage(inputmessage);
+            inputMessage.setId("1");
+            messageArrayList.add(inputMessage);
+        } else {
+            Message inputMessage = new Message();
+            inputMessage.setMessage(inputmessage);
+            inputMessage.setId("100");
+            this.initialRequest = false;
+            //Toast.makeText(getApplicationContext(), "Tap on the message for Voice", Toast.LENGTH_LONG).show();
 
+        }
+
+        this.inputMessage.setText("");
+        mAdapter.notifyDataSetChanged();
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    if (watsonAssistantSession == null) {
+                        ServiceCall<SessionResponse> call = watsonAssistant.createSession(new CreateSessionOptions.Builder().assistantId(mContext.getString(R.string.assistant_id)).build());
+                        watsonAssistantSession = call.execute();
+                    }
+
+                    MessageInput input = new MessageInput.Builder()
+                            .text(inputmessage)
+                            .build();
+                    MessageOptions options = new MessageOptions.Builder()
+                            .assistantId(mContext.getString(R.string.assistant_id))
+                            .input(input)
+                            .sessionId(watsonAssistantSession.getResult().getSessionId())
+                            .build();
+                    Response<MessageResponse> response = watsonAssistant.message(options).execute();
+                    Log.i(TAG, "run: " + response.getResult());
+                    if (response != null &&
+                            response.getResult().getOutput() != null &&
+                            !response.getResult().getOutput().getGeneric().isEmpty()) {
+
+                        List<RuntimeResponseGeneric> responses = response.getResult().getOutput().getGeneric();
+
+                        for (RuntimeResponseGeneric r : responses) {
+                            switch (r.responseType()) {
+                                case "text":
+                                    outMessage = new Message();
+                                    outMessage.setMessage(r.text() /* + "<Insert verbal tic here>" */);
+                                    outMessage.setId("2");
+
+                                    messageArrayList.add(outMessage);
+
+                                    // speak the message
+                                    new SayTask().execute(outMessage.getMessage());
+                                    break;
+
+                                case "option":
+                                    outMessage = new Message();
+                                    String title = r.title();
+                                    String OptionsOutput = "";
+                                    for (int i = 0; i < r.options().size(); i++) {
+                                        DialogNodeOutputOptionsElement option = r.options().get(i);
+                                        OptionsOutput = OptionsOutput + option.getLabel() + "\n";
+
+                                    }
+                                    outMessage.setMessage(title + "\n" + OptionsOutput);
+                                    outMessage.setId("2");
+
+                                    messageArrayList.add(outMessage);
+
+                                    // speak the message
+                                    new SayTask().execute(outMessage.getMessage());
+                                    break;
+
+                                case "image":
+                                    outMessage = new Message(r);
+                                    messageArrayList.add(outMessage);
+
+                                    // speak the description
+                                    new SayTask().execute("You received an image: " + outMessage.getTitle() + outMessage.getDescription());
+                                    break;
+                                default:
+                                    Log.e("Error", "Unhandled message type");
+                            }
                         }
 
-                        this.inputMessage.setText("");
-                        mAdapter.notifyDataSetChanged();
-
-                        Thread thread = new Thread(new Runnable() {
+                        runOnUiThread(new Runnable() {
                             public void run() {
-                                try {
-                                    if (watsonAssistantSession == null) {
-                                        ServiceCall<SessionResponse> call = watsonAssistant.createSession(new CreateSessionOptions.Builder().assistantId(mContext.getString(R.string.assistant_id)).build());
-                                        watsonAssistantSession = call.execute();
-                                    }
+                                mAdapter.notifyDataSetChanged();
+                                if (mAdapter.getItemCount() > 1) {
+                                    recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, mAdapter.getItemCount() - 1);
 
-                                    MessageInput input = new MessageInput.Builder()
-                                            .text(inputmessage)
-                                            .build();
-                                    MessageOptions options = new MessageOptions.Builder()
-                                            .assistantId(mContext.getString(R.string.assistant_id))
-                                            .input(input)
-                                            .sessionId(watsonAssistantSession.getResult().getSessionId())
-                                            .build();
-                                    Response<MessageResponse> response = watsonAssistant.message(options).execute();
-                                    Log.i(TAG, "run: " + response.getResult());
-                                    if (response != null &&
-                                            response.getResult().getOutput() != null &&
-                                            !response.getResult().getOutput().getGeneric().isEmpty()) {
-
-                                        List<RuntimeResponseGeneric> responses = response.getResult().getOutput().getGeneric();
-
-                                        for (RuntimeResponseGeneric r : responses) {
-                                            switch (r.responseType()) {
-                                                case "text":
-                                                    outMessage = new Message();
-                                                    outMessage.setMessage(r.text() /* + "<Insert verbal tic here>" */);
-                                                    outMessage.setId("2");
-
-                                                    messageArrayList.add(outMessage);
-
-                                                    // speak the message
-                                                    new SayTask().execute(outMessage.getMessage());
-                                                    break;
-
-                                                case "option":
-                                                    outMessage =new Message();
-                                                    String title = r.title();
-                                                    String OptionsOutput = "";
-                                                    for (int i = 0; i < r.options().size(); i++) {
-                                                        DialogNodeOutputOptionsElement option = r.options().get(i);
-                                                        OptionsOutput = OptionsOutput + option.getLabel() +"\n";
-
-                                                    }
-                                                    outMessage.setMessage(title + "\n" + OptionsOutput);
-                                                    outMessage.setId("2");
-
-                                                    messageArrayList.add(outMessage);
-
-                                                    // speak the message
-                                                    new SayTask().execute(outMessage.getMessage());
-                                                    break;
-
-                                                case "image":
-                                                    outMessage = new Message(r);
-                                                    messageArrayList.add(outMessage);
-
-                                                    // speak the description
-                                                    new SayTask().execute("You received an image: " + outMessage.getTitle() + outMessage.getDescription());
-                                                    break;
-                                                default:
-                                                    Log.e("Error", "Unhandled message type");
-                                            }
-                                        }
-
-                                        runOnUiThread(new Runnable() {
-                                            public void run() {
-                                                mAdapter.notifyDataSetChanged();
-                                                if (mAdapter.getItemCount() > 1) {
-                                                    recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, mAdapter.getItemCount() - 1);
-
-                                                }
-
-                                            }
-                                        });
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
                                 }
+
                             }
                         });
-
-                        thread.start();
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+    }
 
 
     //Record a message via Watson Speech to Text
@@ -485,8 +510,41 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    protected void displayFreq() {
+        TextView freq = (TextView) findViewById(R.id.freq);
+        for (int i = 0; i < 999; i++) {
+            fReading = i;
+            if (fReading > 999) {
+                fReading = fReading - 999;
+            }
+            String wholeNum = String.valueOf(fReading / 10);
+            String deciNum = String.valueOf(fReading % 10);
+            fDisplay = wholeNum + "." + deciNum;
+            freq.setText(fDisplay);
+            /*
+            try {
+                Thread.sleep(1 * 1000);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }*/
+        }
+    }
 
+    public void animateTextView(float initialValue, float finalValue, int duration, final TextView textview) {
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(initialValue, finalValue);
+        valueAnimator.setDuration(duration);
+
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+
+                textview.setText(df.format(valueAnimator.getAnimatedValue()));
+
+            }
+        });
+        valueAnimator.start();
+
+    }
 }
-
-
 

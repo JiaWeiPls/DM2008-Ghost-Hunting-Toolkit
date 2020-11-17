@@ -58,8 +58,6 @@ public class EMFActivity extends AppCompatActivity {
 
     private ImageButton btnTherm;
     private ImageButton btnRadio;
-    private int emfReading = 0;
-    protected String emfDisplay = "Error";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +69,6 @@ public class EMFActivity extends AppCompatActivity {
 
         btnTherm = findViewById(R.id.thermButton);
         btnRadio = findViewById(R.id.radioButton);
-        displayEMF();
 
         //View.invalidate();
 
@@ -102,19 +99,7 @@ public class EMFActivity extends AppCompatActivity {
             animator.start();
         } */
     }
-    protected void displayEMF() {
-        TextView emf = (TextView) findViewById(R.id.emfreading);
-        for(int i=0; i<9999; i++) {
-            emfReading = i;
-            if (emfReading > 9999) {
-                emfReading = emfReading - 9999;
-            }
-            String wholeNum = String.valueOf(emfReading/100);
-            String deciNum = String.valueOf(emfReading%100);
-            emfDisplay = wholeNum + "." + deciNum;
-            emf.setText(emfDisplay);
-        }
-    }
+
 }
 
 
