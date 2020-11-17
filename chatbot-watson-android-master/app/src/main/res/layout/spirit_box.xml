@@ -74,8 +74,8 @@
         android:id="@+id/hertz"
         android:layout_width="117dp"
         android:layout_height="50dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="280dp"
+        android:layout_marginTop="138dp"
+        android:layout_marginLeft="250dp"
         android:fontFamily="@font/seven_segment"
         android:gravity="center"
         android:text="kHz"
@@ -87,10 +87,10 @@
         android:layout_width="339dp"
         android:layout_height="153dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/seven_segment"
         android:gravity="center"
-        android:text="15.000"
+        android:text="99.9"
         android:textColor="@color/black"
         android:textSize="100dp" />
 
