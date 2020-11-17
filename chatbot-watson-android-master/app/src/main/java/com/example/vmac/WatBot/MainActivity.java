@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
     });
 
     inputMessage = findViewById(R.id.message);
-    btnSend = findViewById(R.id.btn_send);
-    btnRecord = findViewById(R.id.btn_record);
+    btnSend = findViewById(R.id.knob1);
+    btnRecord = findViewById(R.id.knob2);
     String customFont = "Montserrat-Regular.ttf";
     Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
     inputMessage.setTypeface(typeface);
@@ -365,13 +365,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }).start();
             listening = true;
-            Toast.makeText(MainActivity.this, "Listening....Click to Stop", Toast.LENGTH_LONG).show();
+            //.makeText(MainActivity.this, "Listening....Click to Stop", Toast.LENGTH_LONG).show();
 
         } else {
             try {
                 microphoneHelper.closeInputStream();
                 listening = false;
-                Toast.makeText(MainActivity.this, "Stopped Listening....Click to Start", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this, "Stopped Listening....Click to Start", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
