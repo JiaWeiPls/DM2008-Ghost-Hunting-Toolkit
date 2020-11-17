@@ -81,18 +81,15 @@ public class EMFActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        protected void displayEMF() {
-            for(int i=0; i<9999; i++) {
-                emfReading += i;
-                String wholeNum = String.valueOf(emfReading/100);
-                String deciNum = String.valueOf(emfReading%100);
-                emfDisplay = wholeNum + "." + deciNum;
-            }
+    }
+    protected void displayEMF() {
+        for(int i=0; i<9999; i++) {
+            emfReading += i;
+            String wholeNum = String.valueOf(emfReading/100);
+            String deciNum = String.valueOf(emfReading%100);
+            emfDisplay = wholeNum + "." + deciNum;
         }
     }
-
-
 }
 
 
