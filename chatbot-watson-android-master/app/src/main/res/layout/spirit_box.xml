@@ -8,6 +8,8 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.vmac.WatBot.MainActivity" >
 
+    <include layout="@layout/content_chat_room" />
+
     <ImageView
         android:id="@+id/screenback"
         android:layout_width="match_parent"
@@ -99,7 +101,7 @@
         android:id="@+id/onoff"
         android:layout_width="253dp"
         android:layout_height="210dp"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="430dp"
         android:layout_marginLeft="180dp"
         app:srcCompat="@drawable/switch_8" /><!--<a href='https://www.freepik.com/vectors/design'>Design vector created by aranjuezmedina - www.freepik.com</a>-->
 
@@ -108,18 +110,40 @@
         android:id="@+id/knob1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="430dp"
+        android:layout_marginTop="410dp"
         android:layout_marginLeft="70dp"
         app:srcCompat="@drawable/spiritboxknob1_8" /><!--<a href='https://www.freepik.com/vectors/music'>Music vector created by GarryKillian - www.freepik.com</a>-->
     <ImageView
         android:id="@+id/knob2"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginTop="550dp"
         android:layout_marginLeft="70dp"
         app:srcCompat="@drawable/spiritboxknob2_8" /><!--<a href='https://www.freepik.com/vectors/music'>Music vector created by GarryKillian - www.freepik.com</a>-->
 
+    <ImageButton
+        android:id="@+id/emfButton"
+        android:layout_width="130dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="650dp"
+        android:background=""
+        android:scaleType="center"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        app:srcCompat="@drawable/emficon" />
 
+    <ImageButton
+        android:id="@+id/thermButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="630dp"
+        android:background=""
+        android:scaleType="center"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        app:srcCompat="@drawable/thermometericon" />
 
 
 </android.support.design.widget.CoordinatorLayout>
