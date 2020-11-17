@@ -28,18 +28,18 @@ import com.ibm.cloud.sdk.core.http.HttpMediaType;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
+import com.ibm.watson.assistant.v2.Assistant;
+import com.ibm.watson.assistant.v2.model.CreateSessionOptions;
 import com.ibm.watson.assistant.v2.model.DialogNodeOutputOptionsElement;
+import com.ibm.watson.assistant.v2.model.MessageInput;
+import com.ibm.watson.assistant.v2.model.MessageOptions;
+import com.ibm.watson.assistant.v2.model.MessageResponse;
 import com.ibm.watson.assistant.v2.model.RuntimeResponseGeneric;
+import com.ibm.watson.assistant.v2.model.SessionResponse;
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneHelper;
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneInputStream;
 import com.ibm.watson.developer_cloud.android.library.audio.StreamPlayer;
 import com.ibm.watson.developer_cloud.android.library.audio.utils.ContentType;
-import com.ibm.watson.assistant.v2.Assistant;
-import com.ibm.watson.assistant.v2.model.CreateSessionOptions;
-import com.ibm.watson.assistant.v2.model.MessageInput;
-import com.ibm.watson.assistant.v2.model.MessageOptions;
-import com.ibm.watson.assistant.v2.model.MessageResponse;
-import com.ibm.watson.assistant.v2.model.SessionResponse;
 import com.ibm.watson.speech_to_text.v1.SpeechToText;
 import com.ibm.watson.speech_to_text.v1.model.RecognizeOptions;
 import com.ibm.watson.speech_to_text.v1.model.SpeechRecognitionResults;
@@ -51,7 +51,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class EMFActivity extends AppCompatActivity {
 
   private RecyclerView recyclerView;
   private ChatAdapter mAdapter;
@@ -365,13 +365,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }).start();
             listening = true;
-            Toast.makeText(MainActivity.this, "Listening....Click to Stop", Toast.LENGTH_LONG).show();
+            Toast.makeText(EMFActivity.this, "Listening....Click to Stop", Toast.LENGTH_LONG).show();
 
         } else {
             try {
                 microphoneHelper.closeInputStream();
                 listening = false;
-                Toast.makeText(MainActivity.this, "Stopped Listening....Click to Start", Toast.LENGTH_LONG).show();
+                Toast.makeText(EMFActivity.this, "Stopped Listening....Click to Start", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -436,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EMFActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         });
