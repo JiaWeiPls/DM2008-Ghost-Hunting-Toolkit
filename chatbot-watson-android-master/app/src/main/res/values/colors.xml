@@ -8,4 +8,5 @@
     <color name="gray">#BFBFBF</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="bg_bubble_watbot">#2c2c2c</color>
 </resources>

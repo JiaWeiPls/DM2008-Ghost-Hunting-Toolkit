@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:background="#2C2C2C"
+        android:background="@android:color/white"
         android:orientation="horizontal"
         android:weightSum="4">
 
@@ -30,10 +30,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
-            android:background="#2c2c2c"
+            android:background="@null"
             android:elevation="0dp"
             android:paddingLeft="10dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_mic" />
 
         <EditText
             android:id="@+id/message"
@@ -42,7 +43,8 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="10dp"
             android:layout_weight="3"
-            android:background="#2C2C2C"
+            android:background="@null"
+            android:hint="@string/what_s_on_your_mind"
             android:lines="1"
             android:paddingLeft="10dp" />
 
@@ -60,10 +62,11 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="#2c2c2c"
+            android:background="@null"
             android:elevation="0dp"
             android:paddingLeft="10dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_send" />
 
 
     </LinearLayout>
