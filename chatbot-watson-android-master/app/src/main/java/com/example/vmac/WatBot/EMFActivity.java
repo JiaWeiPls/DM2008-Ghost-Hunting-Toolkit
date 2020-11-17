@@ -51,7 +51,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThermActivity extends AppCompatActivity {
+public class EMFActivity extends AppCompatActivity {
 
     private ImageButton btnTherm;
     private ImageButton btnRadio;
