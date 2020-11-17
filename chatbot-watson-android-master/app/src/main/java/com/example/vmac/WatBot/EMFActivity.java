@@ -55,6 +55,8 @@ public class EMFActivity extends AppCompatActivity {
 
     private ImageButton btnTherm;
     private ImageButton btnRadio;
+    private int emfReading = 0;
+    protected String emfDisplay = "Error";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,18 @@ public class EMFActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        protected void displayEMF() {
+            for(int i=0; i<9999; i++) {
+                emfReading += i;
+                String wholeNum = String.valueOf(emfReading/100);
+                String deciNum = String.valueOf(emfReading%100);
+                emfDisplay = wholeNum + "." + deciNum;
+            }
+        }
     }
+
+
 }
 
 
