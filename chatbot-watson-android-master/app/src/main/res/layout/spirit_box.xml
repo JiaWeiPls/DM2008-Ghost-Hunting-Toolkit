@@ -11,6 +11,12 @@
     <include layout="@layout/content_chat_room" />
 
     <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/spiritbox_background" />
+
+    <ImageView
         android:id="@+id/screenback"
         android:layout_width="match_parent"
         android:layout_height="234dp"
@@ -57,13 +63,15 @@
         android:layout_marginTop="125dp"
         app:layout_anchorGravity="center_horizontal"
         app:srcCompat="@drawable/spiritbox_screen" />
+
     <TextView
         android:id="@+id/model"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
         android:layout_marginTop="0dp"
+        android:gravity="center"
         android:text="DM-2008" />
+
     <TextView
         android:id="@+id/radio"
         android:layout_width="match_parent"
@@ -106,19 +114,23 @@
         app:srcCompat="@drawable/switch_8" /><!--<a href='https://www.freepik.com/vectors/design'>Design vector created by aranjuezmedina - www.freepik.com</a>-->
 
 
-    <ImageView
+    <ImageButton
         android:id="@+id/knob1"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="410dp"
         android:layout_marginLeft="70dp"
+        android:scaleType="fitCenter"
+        android:background="@null"
         app:srcCompat="@drawable/spiritboxknob1_8" /><!--<a href='https://www.freepik.com/vectors/music'>Music vector created by GarryKillian - www.freepik.com</a>-->
-    <ImageView
+    <ImageButton
         android:id="@+id/knob2"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="550dp"
         android:layout_marginLeft="70dp"
+        android:scaleType="fitCenter"
+        android:background="@null"
         app:srcCompat="@drawable/spiritboxknob2_8" /><!--<a href='https://www.freepik.com/vectors/music'>Music vector created by GarryKillian - www.freepik.com</a>-->
 
     <ImageButton
