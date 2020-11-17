@@ -61,6 +61,9 @@ public class ThermActivity extends AppCompatActivity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.thermometer);
 
+      Intent intent = new Intent(ThermActivity.this, BackgroundSoundService.class);
+      stopService(intent);
+
       btnEMF = findViewById(R.id.emfButton);
       btnRadio = findViewById(R.id.radioButton);
 
