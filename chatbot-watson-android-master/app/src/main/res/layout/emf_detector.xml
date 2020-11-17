@@ -75,5 +75,28 @@
         android:layout_height="115dp"
         android:layout_marginTop="550dp"
         app:srcCompat="@drawable/emfswitch" />
+    <TextView
+        android:id="@+id/mG"
+        android:layout_width="117dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginLeft="270dp"
+        android:fontFamily="@font/seven_segment"
+        android:gravity="center"
+        android:text="mG"
+        android:textColor="@color/black"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/emfreading"
+        android:layout_width="339dp"
+        android:layout_height="153dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/seven_segment"
+        android:gravity="center"
+        android:text="99.99"
+        android:textColor="@color/black"
+        android:textSize="100dp" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -93,5 +93,54 @@
         android:layout_marginTop="500dp"
         app:srcCompat="@drawable/thermswitch" />
 
+    <TextView
+        android:id="@+id/cel"
+        android:layout_width="117dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="167dp"
+        android:layout_marginLeft="230dp"
+        android:fontFamily="@font/seven_segment"
+        android:gravity="center"
+        android:text="C"
+        android:textColor="@color/black"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/deg"
+        android:layout_width="117dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="155dp"
+        android:layout_marginLeft="220dp"
+        android:fontFamily="@font/seven_segment"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="10dp" />
+
+    <TextView
+        android:id="@+id/sign"
+        android:layout_width="156dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/seven_segment"
+        android:gravity="center"
+        android:rotation="90"
+        android:text="1"
+        android:textColor="@color/black"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/temperature"
+        android:layout_width="339dp"
+        android:layout_height="153dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/seven_segment"
+        android:gravity="center"
+        android:text="99.9"
+        android:textColor="@color/black"
+        android:textSize="70dp" />
+
 
 </android.support.design.widget.CoordinatorLayout>
