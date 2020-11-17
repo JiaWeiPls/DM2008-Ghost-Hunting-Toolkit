@@ -1,15 +1,6 @@
 package com.example.vmac.WatBot;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
-import android.animation.TypeConverter;
 import android.animation.ValueAnimator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Interpolator;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import android.widget.EditText;

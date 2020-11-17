@@ -1,5 +1,8 @@
 package com.example.vmac.WatBot;
 
+import android.animation.ValueAnimator;
+import java.text.DecimalFormat;
+
 import android.content.Intent;
 import android.widget.TextView;
 import android.animation.ValueAnimator;
@@ -58,6 +61,9 @@ public class EMFActivity extends AppCompatActivity {
 
     private ImageButton btnTherm;
     private ImageButton btnRadio;
+    private TextView emfDisplay;
+    private static DecimalFormat df = new DecimalFormat("00.00");
+    public boolean ghostNear = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,13 @@ public class EMFActivity extends AppCompatActivity {
 
         btnTherm = findViewById(R.id.thermButton);
         btnRadio = findViewById(R.id.radioButton);
+        emfDisplay = findViewById(R.id.emfreading);
+        //displayFreq();
+        if(!ghostNear) {
+            animateTextView(3.5f, 4.6f, 600000, emfDisplay);
+        } else {
+            animateTextView(5.2f, 56.79f, 60000, emfDisplay);
+        }
 
         //View.invalidate();
 
@@ -98,6 +111,23 @@ public class EMFActivity extends AppCompatActivity {
             });
             animator.start();
         } */
+    }
+
+    public void animateTextView(float initialValue, float finalValue, int duration, final TextView textview) {
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(initialValue, finalValue);
+        valueAnimator.setDuration(duration);
+
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+
+                textview.setText(df.format(valueAnimator.getAnimatedValue()));
+
+            }
+        });
+        valueAnimator.start();
+
     }
 
 }
