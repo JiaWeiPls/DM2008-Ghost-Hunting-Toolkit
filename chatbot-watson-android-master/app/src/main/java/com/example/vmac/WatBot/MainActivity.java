@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                             inputMessage.setMessage(inputmessage);
                             inputMessage.setId("100");
                             this.initialRequest = false;
-                            Toast.makeText(getApplicationContext(), "Tap on the message for Voice", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Tap on the message for Voice", Toast.LENGTH_LONG).show();
 
                         }
 
