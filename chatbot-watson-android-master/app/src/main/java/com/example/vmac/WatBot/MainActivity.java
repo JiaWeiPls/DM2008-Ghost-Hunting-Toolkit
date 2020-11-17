@@ -448,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             streamPlayer.playStream(textToSpeech.synthesize(new SynthesizeOptions.Builder()
                     .text(params[0])
-                    .voice(SynthesizeOptions.Voice.EN_US_LISAVOICE)
+                    .voice(SynthesizeOptions.Voice.EN_US_MICHAELV3VOICE)
                     .accept(HttpMediaType.AUDIO_WAV)
                     .build()).execute().getResult());
             return "Did synthesize";
