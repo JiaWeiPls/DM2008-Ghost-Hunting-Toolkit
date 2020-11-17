@@ -1,6 +1,9 @@
 package com.example.vmac.WatBot;
 
 import android.content.Intent;
+import android.widget.TextView;
+import android.animation.ValueAnimator;
+import android.widget.EditText;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -65,6 +68,9 @@ public class EMFActivity extends AppCompatActivity {
 
         btnTherm = findViewById(R.id.thermButton);
         btnRadio = findViewById(R.id.radioButton);
+        displayEMF();
+
+        //View.invalidate();
 
         btnTherm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,13 +87,29 @@ public class EMFActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        /*
+        private void startCountAnimation() {
+            ValueAnimator animator = ValueAnimator.ofInt(0, 600);
+            animator.setDuration(5000);
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    emf.setText(animation.getAnimatedValue().toString());
+                }
+            });
+            animator.start();
+        } */
     }
     protected void displayEMF() {
+        TextView emf = (TextView) findViewById(R.id.emfreading);
         for(int i=0; i<9999; i++) {
-            emfReading += i;
+            emfReading = i;
+            if (emfReading > 9999) {
+                emfReading = emfReading - 9999;
+            }
             String wholeNum = String.valueOf(emfReading/100);
             String deciNum = String.valueOf(emfReading%100);
             emfDisplay = wholeNum + "." + deciNum;
+            emf.setText(emfDisplay);
         }
     }
 }
