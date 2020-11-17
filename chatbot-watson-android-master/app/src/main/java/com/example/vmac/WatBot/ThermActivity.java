@@ -56,12 +56,6 @@ public class ThermActivity extends AppCompatActivity {
   private ImageButton btnEMF;
   private ImageButton btnRadio;
 
-  private Assistant watsonAssistant;
-  private Response<SessionResponse> watsonAssistantSession;
-  private SpeechToText speechService;
-  private TextToSpeech textToSpeech;
-  public Message outMessage;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);

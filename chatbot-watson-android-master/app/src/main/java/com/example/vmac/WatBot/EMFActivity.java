@@ -56,12 +56,6 @@ public class EMFActivity extends AppCompatActivity {
     private ImageButton btnTherm;
     private ImageButton btnRadio;
 
-    private Assistant watsonAssistant;
-    private Response<SessionResponse> watsonAssistantSession;
-    private SpeechToText speechService;
-    private TextToSpeech textToSpeech;
-    public Message outMessage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

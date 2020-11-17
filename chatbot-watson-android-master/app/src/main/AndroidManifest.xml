@@ -21,6 +21,15 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".EMFActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".ThermActivity"
+            android:screenOrientation="portrait"></activity>
+        
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
