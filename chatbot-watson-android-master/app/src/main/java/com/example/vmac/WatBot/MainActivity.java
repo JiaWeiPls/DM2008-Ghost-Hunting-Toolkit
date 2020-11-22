@@ -92,7 +92,10 @@ public class MainActivity extends AppCompatActivity {
     public Message outMessage;
 
     private boolean ghostNear = false;
-    private int value;
+    private int valueCheck;
+    private int valueRan;
+    private int thresholdCheck = 50;
+    private int thresholdGN = 50;
 
     private void createServices() {
         watsonAssistant = new Assistant("2019-02-28", new IamAuthenticator(mContext.getString(R.string.assistant_apikey)));
@@ -194,9 +197,8 @@ public class MainActivity extends AppCompatActivity {
                     if(ghostNear) {
                         sendMessage();
                     } else {
-                        value = ThreadLocalRandom.current().nextInt(1, 100);
-                        int treshold = 50;
-                        if (value > treshold) {
+                        valueCheck = ThreadLocalRandom.current().nextInt(1, 100);
+                        if (valueCheck > thresholdCheck) {
                             sendMessage();
                         }
                     }
@@ -528,6 +530,12 @@ public class MainActivity extends AppCompatActivity {
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             }*/
+            valueRan = ThreadLocalRandom.current().nextInt(1, 100);
+            if(valueRan > thresholdGN) {
+                ghostNear = true;
+            } else {
+                ghostNear = false;
+            }
         }
     }
 
