@@ -23,8 +23,10 @@ public class EMFActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.emf_detector);
 
-        Intent intent = new Intent(EMFActivity.this, BackgroundSoundService.class);
-        stopService(intent);
+        Intent radiosfx = new Intent(EMFActivity.this, RadioSFXService.class);
+        stopService(radiosfx);
+        Intent emfsfx = new Intent(EMFActivity.this, EMFSFXService.class);
+        startService(emfsfx);
 
         btnTherm = findViewById(R.id.thermButton);
         btnRadio = findViewById(R.id.radioButton);

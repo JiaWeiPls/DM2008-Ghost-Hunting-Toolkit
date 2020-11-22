@@ -99,11 +99,6 @@ public class MainActivity extends AppCompatActivity {
         speechService = new SpeechToText(new IamAuthenticator(mContext.getString(R.string.STT_apikey)));
         speechService.setServiceUrl(mContext.getString(R.string.STT_url));
     }
-  /*
-  public void PlayBackgroundSound(View view) {
-      Intent intent = new Intent(MainActivity.this, BackgroundSoundService.class);
-      startService(intent);
-  }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,8 +107,10 @@ public class MainActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
-        Intent intent = new Intent(MainActivity.this, BackgroundSoundService.class);
-        startService(intent);
+        Intent emfsfx = new Intent(MainActivity.this, EMFSFXService.class);
+        stopService(emfsfx);
+        Intent radiosfx = new Intent(MainActivity.this, RadioSFXService.class);
+        startService(radiosfx);
 
         btnEMF = findViewById(R.id.emfButton);
         btnTherm = findViewById(R.id.thermButton);

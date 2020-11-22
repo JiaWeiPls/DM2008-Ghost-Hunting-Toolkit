@@ -41,7 +41,8 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".BackgroundSoundService" />
+        <service android:name=".RadioSFXService" />
+        <service android:name=".EMFSFXService" />
 
     </application>
 

@@ -15,6 +15,7 @@ public class ThermActivity extends AppCompatActivity {
   private ImageButton btnEMF;
   private ImageButton btnRadio;
   private TextView thermDisplay;
+  private TextView negativeSign;
   private static DecimalFormat df = new DecimalFormat("00.0");
   public boolean ghostNear = false;
 
@@ -23,17 +24,22 @@ public class ThermActivity extends AppCompatActivity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.thermometer);
 
-      Intent intent = new Intent(ThermActivity.this, BackgroundSoundService.class);
-      stopService(intent);
+      Intent emfsfx = new Intent(ThermActivity.this, EMFSFXService.class);
+      stopService(emfsfx);
+      Intent radiosfx = new Intent(ThermActivity.this, RadioSFXService.class);
+      stopService(radiosfx);
 
       btnEMF = findViewById(R.id.emfButton);
       btnRadio = findViewById(R.id.radioButton);
       thermDisplay = findViewById(R.id.temperature);
+      negativeSign = (TextView)findViewById(R.id.sign);
       //displayFreq();
       if(!ghostNear) {
-          animateTextView(3.5f, 4.6f, 600000, thermDisplay);
+          animateTextView(25.5f, 27.6f, 600000, thermDisplay);
+          negativeSign.setText("");
       } else {
           animateTextView(5.2f, 56.79f, 60000, thermDisplay);
+          negativeSign.setText("-");
       }
 
 
