@@ -55,6 +55,8 @@ import com.ibm.watson.text_to_speech.v1.model.SynthesizeOptions;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -88,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
     private SpeechToText speechService;
     private TextToSpeech textToSpeech;
     public Message outMessage;
+
+    private boolean ghostNear = false;
+    private int value;
 
     private void createServices() {
         watsonAssistant = new Assistant("2019-02-28", new IamAuthenticator(mContext.getString(R.string.assistant_apikey)));
@@ -186,7 +191,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkInternetConnection()) {
-                    sendMessage();
+                    if(ghostNear) {
+                        sendMessage();
+                    } else {
+                        value = ThreadLocalRandom.current().nextInt(1, 100);
+                        int treshold = 50;
+                        if (value > treshold) {
+                            sendMessage();
+                        }
+                    }
                 }
             }
         });
@@ -263,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Sending a message to Watson Assistant Service
     private void sendMessage() {
-
+        Toast.makeText(this, "Message has been sent", Toast.LENGTH_SHORT).show();
         final String inputmessage = this.inputMessage.getText().toString().trim();
         if (!this.initialRequest) {
             Message inputMessage = new Message();
