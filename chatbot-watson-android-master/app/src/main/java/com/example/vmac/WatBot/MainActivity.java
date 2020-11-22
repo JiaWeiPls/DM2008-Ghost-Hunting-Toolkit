@@ -385,13 +385,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }).start();
             listening = true;
-            //.makeText(MainActivity.this, "Listening....Click to Stop", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Start Message Recording", Toast.LENGTH_LONG).show();
 
         } else {
             try {
                 microphoneHelper.closeInputStream();
                 listening = false;
-                //Toast.makeText(MainActivity.this, "Stopped Listening....Click to Start", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Stopped Message Recording", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
