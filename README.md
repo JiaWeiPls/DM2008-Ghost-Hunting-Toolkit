@@ -36,6 +36,17 @@ This project is mantained by:
 * [Jia Wei](http://github.com/JiaWeiPls)
 * [Theodore](http://github.com/theOrderOfLoki)
 
+## Usage
+Spirit Box/FM Radio:
+Note that the spirit box has 2 buttons, skinned as knobs at the bottom left of the screen.
+The lower button is to start/stop recording, & the upper button to send message.
+1. Tap the lower button to start recording & speak into the phone's speaker (Proper enunciation helps improve the accuracy of STT)
+2. Tap the lower button again to stop recording.
+3. Tap the upper button to send the message.
+Thermometer:
+1. The lower the temperature value indicated on the screen, the nearer the ghost (No actions requried on the players end)
+EMF Reader:
+1. The higher the EMF value indicated on the screen, the nearer the ghost (No actions requried on the players end)
 
 ## Contributing
 
