@@ -43,8 +43,10 @@ The lower button is to start/stop recording, & the upper button to send message.
 1. Tap the lower button to start recording & speak into the phone's speaker (Proper enunciation helps improve the accuracy of STT)
 2. Tap the lower button again to stop recording.
 3. Tap the upper button to send the message.
+
 Thermometer:
 1. The lower the temperature value indicated on the screen, the nearer the ghost (No actions requried on the players end)
+
 EMF Reader:
 1. The higher the EMF value indicated on the screen, the nearer the ghost (No actions requried on the players end)
 
