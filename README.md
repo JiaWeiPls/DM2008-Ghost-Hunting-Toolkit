@@ -50,6 +50,9 @@ Thermometer:
 EMF Reader:
 1. The higher the EMF value indicated on the screen, the nearer the ghost (No actions requried on the players end)
 
+Toggle:
+1. To switch between the tools, tap their corresponding icons at the bottom of the screen.
+
 ## Contributing
 
 1. Fork it
