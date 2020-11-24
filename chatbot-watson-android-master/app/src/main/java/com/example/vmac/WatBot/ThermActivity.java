@@ -2,7 +2,9 @@ package com.example.vmac.WatBot;
 
 import android.animation.ValueAnimator;
 import java.text.DecimalFormat;
+import java.util.concurrent.ThreadLocalRandom;
 
+import android.content.Intent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,10 @@ public class ThermActivity extends AppCompatActivity {
   private TextView negativeSign;
   private static DecimalFormat df = new DecimalFormat("00.0");
   public boolean ghostNear = false;
+  public final static String EXTRA_MESSAGE = "com.example.WatBot.MESSAGE";
+  private int valueRan;
+  private int thresholdGN = 50;
+    private String ghostNearStr;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,12 @@ public class ThermActivity extends AppCompatActivity {
           @Override
           public void onClick(View v) {
               Intent intent = new Intent(v.getContext(), EMFActivity.class);
+              if(ghostNear) {
+                  ghostNearStr = "y";
+              } else {
+                  ghostNearStr = "n";
+              }
+              intent.putExtra(EXTRA_MESSAGE, ghostNearStr);
               startActivity(intent);
           }
       });
@@ -55,9 +67,23 @@ public class ThermActivity extends AppCompatActivity {
           @Override
           public void onClick(View v) {
               Intent intent = new Intent(v.getContext(), MainActivity.class);
+              if(ghostNear) {
+                  ghostNearStr = "y";
+              } else {
+                  ghostNearStr = "n";
+              }
+              intent.putExtra(EXTRA_MESSAGE, ghostNearStr);
               startActivity(intent);
           }
       });
+
+      Intent intent = getIntent();
+      String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+      if (message == "y") {
+          ghostNear = true;
+      } else {
+          ghostNear = false;
+      }
   }
   public void animateTextView(float initialValue, float finalValue, int duration, final TextView textview) {
       ValueAnimator valueAnimator = ValueAnimator.ofFloat(initialValue, finalValue);
@@ -73,6 +99,12 @@ public class ThermActivity extends AppCompatActivity {
       });
       valueAnimator.start();
 
+      valueRan = ThreadLocalRandom.current().nextInt(1, 100);
+      if(valueRan > thresholdGN) {
+          ghostNear = true;
+      } else {
+          ghostNear = false;
+      }
   }
 }
 

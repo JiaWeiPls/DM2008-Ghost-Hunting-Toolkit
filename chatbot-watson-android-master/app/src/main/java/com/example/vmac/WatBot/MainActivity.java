@@ -2,7 +2,7 @@ package com.example.vmac.WatBot;
 
 import android.animation.ValueAnimator;
 import java.text.DecimalFormat;
-
+import android.content.Intent;
 import android.widget.EditText;
 import android.content.Intent;
 import android.Manifest;
@@ -96,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
     private int valueRan;
     private int thresholdCheck = 50;
     private int thresholdGN = 50;
+    public final static String EXTRA_MESSAGE = "com.example.WatBot.MESSAGE";
+    private String ghostNearStr;
 
     private void createServices() {
         watsonAssistant = new Assistant("2019-02-28", new IamAuthenticator(mContext.getString(R.string.assistant_apikey)));
@@ -130,6 +132,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), EMFActivity.class);
+                if(ghostNear) {
+                    ghostNearStr = "y";
+                } else {
+                    ghostNearStr = "n";
+                }
+                intent.putExtra(EXTRA_MESSAGE, ghostNearStr);
                 startActivity(intent);
             }
         });
@@ -138,6 +146,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ThermActivity.class);
+                if(ghostNear) {
+                    ghostNearStr = "y";
+                } else {
+                    ghostNearStr = "n";
+                }
+                intent.putExtra(EXTRA_MESSAGE, ghostNearStr);
                 startActivity(intent);
             }
         });
@@ -215,6 +229,14 @@ public class MainActivity extends AppCompatActivity {
 
         createServices();
         sendMessage();
+
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        if (message == "y") {
+            ghostNear = true;
+        } else {
+            ghostNear = false;
+        }
     }
 
     ;
@@ -530,12 +552,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             }*/
-            valueRan = ThreadLocalRandom.current().nextInt(1, 100);
-            if(valueRan > thresholdGN) {
-                ghostNear = true;
-            } else {
-                ghostNear = false;
-            }
         }
     }
 
@@ -554,6 +570,13 @@ public class MainActivity extends AppCompatActivity {
         });
         valueAnimator.start();
 
+        // Also updates ghostNear while updating values for freq
+        valueRan = ThreadLocalRandom.current().nextInt(1, 100);
+        if(valueRan > thresholdGN) {
+            ghostNear = true;
+        } else {
+            ghostNear = false;
+        }
     }
 }
 
