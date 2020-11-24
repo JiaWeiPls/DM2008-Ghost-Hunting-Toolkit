@@ -1,5 +1,3 @@
-# DM2008-Ghost-Hunting_Toolkit-Android
- 
 # DM2008 Final Project Android Application Find Me
 
 This is a Ghost-hunting Toolkit as an Android Application called Find Me.
@@ -7,7 +5,7 @@ This is a Ghost-hunting Toolkit as an Android Application called Find Me.
 ## Installation
 Clone this repository and import into **Android Studio**
 ```bash
-git clone git@github.com:wolox/DM2008-Ghost-Hunting-Toolkit.git
+git clone git@github.com:JiaWeiPls/DM2008-Ghost-Hunting-Toolkit.git
 ```
 
 ## Configuration
