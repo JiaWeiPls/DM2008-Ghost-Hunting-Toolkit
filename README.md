@@ -2,7 +2,7 @@
 
 This is a Ghost-hunting Toolkit as an Android Application called Find Me.
 This version of Find Me has no multiplayer implemented due to API incompatiblity. A seperate app has been made as a proof of concept.
-Go to [Findme-Firebase Repo](https://github.com/JiaWeiPls/DM2008-FindMe-Firebase) see how it works.
+Go to [Findme-Firebase Repo](https://github.com/JiaWeiPls/DM2008-FindMe-Firebase) to see how it works.
 
 ## Installation
 Clone this repository and import into **Android Studio**
